@@ -1,4 +1,4 @@
-package jade;
+package gabe;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;

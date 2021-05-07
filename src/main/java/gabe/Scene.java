@@ -1,4 +1,4 @@
-package jade;
+package gabe;
 
 public abstract class Scene {
 

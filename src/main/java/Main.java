@@ -1,4 +1,4 @@
-import jade.Window;
+import gabe.Window;
 
 public class Main {
 
