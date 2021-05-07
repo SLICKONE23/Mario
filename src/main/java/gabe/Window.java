@@ -34,6 +34,22 @@ public class Window {
         this.a = 1.0f;
     }
 
+    public static void changeScene(int newScene) {
+        switch (newScene) {
+            case 0 -> {
+                currentScene = new LevelEditorScene();
+                // currentScene.init();
+            }
+            case 1 -> {
+                currentScene = new LevelScene();
+                // currentScene.init();
+            }
+            default -> {
+                assert false : "Unknown scene '" + newScene + "'";
+            }
+        }
+    }
+
     public static Window get() {
         if (Window.window == null) {
             Window.window = new Window();
@@ -47,6 +63,14 @@ public class Window {
 
         init();
         loop();
+
+        // Free the memory
+        glfwFreeCallbacks(glfwWindow);
+        glfwDestroyWindow(glfwWindow);
+
+        // Terminate GLFW and the free error callback
+        glfwTerminate();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     public void init() {
@@ -66,7 +90,6 @@ public class Window {
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
-
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
